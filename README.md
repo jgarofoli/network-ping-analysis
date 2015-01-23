@@ -27,4 +27,6 @@ and produce a report.
 
 * find the periodicity of failures
 * plot the round trip time, too
+* make a pie chart of the various number of pings that come back
 * more things!
+
