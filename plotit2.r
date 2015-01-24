@@ -12,10 +12,25 @@ mkreport <- function(fname) {
     slices <- hist(y,plot=F)#ylab="entries [N]",xlab="number of successful pings [out of 4]", main="dist. of successful pings",plot=T)
     nsl <- c(sum(slices$density[1:7]),slices$density[8],slices$density[9],slices$density[10])
     lbls <- c("<7","8","9","10")
-    pie(nsl,labels=lbls,main="fractions of\nreturned pings")
+    pie(nsl,labels=lbls,main="fraction of\nreturned pings")
 
-    timedelta <- lapply(mydata,diff)$V1
-    hist(timedelta,plot=T,xlab='time between ping calls [sec]',ylab='entries [N]',main="distribution of time\nbetween ping requests")
+    timedelta <- diff(mydata$V1,2)
+    hist(timedelta,plot=T,
+         xlab='time between ping calls [sec]',
+         ylab='entries [N]',
+         main="distribution of time\nbetween ping requests",
+         breaks=0:60)
 
+    selZero <- md$V1[md$V3 <= 7]
+    selZeroDelta <- diff(selZero,2)
+    hist(selZeroDelta,plot=T,
+         breaks=seq(0,max(selZeroDelta)+100,30),
+         main="distribution of time\n between <7 pings returned events",
+         ylab="entries [N/30 seconds]",
+         xlab="time between total failures [sec]",
+         )
+
+
+    mydata
 }
 
