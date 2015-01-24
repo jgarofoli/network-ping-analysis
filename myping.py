@@ -12,8 +12,7 @@ IMPROVEMENTS:
 
 """
 
-host = "www.google.com"
-host = "74.125.28.105"
+host = "8.8.8.8" # google dns
 
 def parse_output(out):
     lines = out.split('\n')

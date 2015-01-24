@@ -1,4 +1,4 @@
-data <- read.table('log3.txt')
+data <- read.table('~/Dropbox/Online/Dunster/log4.txt')
 
 x <- (data[,1] - data[1,1])/60./60.
 y <- data[,3]
