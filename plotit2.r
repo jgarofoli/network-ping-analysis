@@ -4,6 +4,7 @@ mkreport <- function(fname) {
     y <- mydata[,3]
 
     #pdf('figure1.pdf')
+    quartz()
     par(mfrow=c(2,2))
     plot(y~x,ylab="pings returned (out of 10)",xlab="time (hr)",main=fname,
              pch=16,col=rgb(0,0,0,1/8))
@@ -21,7 +22,7 @@ mkreport <- function(fname) {
          main="distribution of time\nbetween ping requests",
          breaks=0:60)
 
-    selZero <- md$V1[md$V3 <= 7]
+    selZero <- mydata$V1[mydata$V3 <= 7]
     selZeroDelta <- diff(selZero,2)
     hist(selZeroDelta,plot=T,
          breaks=seq(0,max(selZeroDelta)+100,30),
@@ -29,6 +30,15 @@ mkreport <- function(fname) {
          ylab="entries [N/30 seconds]",
          xlab="time between total failures [sec]",
          )
+
+    quartz()
+    par(mfrow=c(2,2))
+    hist(mydata$V4,plot=T,
+         xlab="avg round trip ping time [ms]",
+         ylab="entries [N]",
+         main="ping time",
+         breaks=seq(0,1000,5),
+         xlim=c(0,100))
 
 
     mydata
